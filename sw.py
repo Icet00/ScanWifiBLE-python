@@ -33,35 +33,29 @@ def scanWifi(comp):
     index2=[]
     index3=[]
     #Because some wifi doesn't have protection, we resolve the skiping line problem by adding lines
+    #Wifi without protection, list them
     for k in range(len(txt)):
         if "off" in txt[k]:
             index.insert(0,k+2)
+    #Insert not protected
     for h in range(len(index)):
         txt.insert(index[h],"Not_protected")
-    #print "hello there"
+    #See if on for the encryption and insert it
     for m in range(len(txt)):
-        #print txt[m]
         if "on ,\n" == txt[m]:
             index2.insert(0,m+2)
-    #print index2
+    #If nothing written
     for t in range(len(index2)):
-	#print "doing some shit"
 	if index2[t] <= len(txt)-2:
 	    if "WPA" not in txt[index2[t]]:
-	        #print "i'm doing something with wep"
+	        #Insert WEP
                 txt.insert(index2[t],"WEP")
-	    else:pass # print "nothing here captain"
+	    else:pass
 	else :pass
-	    #if "WPA" not in txt[index2[t]-1]:
-             #   print "i'm doing something with wep"
-              #  txt.insert(index2[t],"WEP")
-            #else: print "nothing here captain"
-
+    #Wifi with 2 encryption keys, delete the second
     for e in range(len(txt)):
 	if "WPA" in txt[e]:
 	    if "WPA" in txt[e-1]:
-#		print txt[e-1]
-#		print txt[e]
 		index3.insert(0,e)
 #    index3.reverse()
 #    print index3
